@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/dzalazar/argocd_kustomize_project.git'
+    repoURL: 'https://github.com/dezalazar/argocd_kustomize_project.git'
     path: apps/hello-world/overlays/dev
     targetRevision: main
   destination:

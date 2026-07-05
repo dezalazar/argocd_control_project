@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/dzalazar/argocd_control_project.git'
+    repoURL: 'https://github.com/dezalazar/argocd_control_project.git'
     path: apps
     targetRevision: main
     directory:

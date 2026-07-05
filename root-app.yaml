@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-application
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/dzalazar/argocd_control_project.git'
+    path: apps
+    targetRevision: main
+    directory:
+      recurse: true # 🚀 Esto le dice a la madre que busque todos los YAML dentro de la carpeta
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd # La madre vive en el namespace de ArgoCD para poder controlarlo todo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

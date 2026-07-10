@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: helm-app-stg
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/dezalazar/argocd_helm_project.git'
+    path: charts/hello-world      # La ruta donde está tu Chart.yaml
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values-stg.yaml         # El archivo de configuración específico para STG 
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: stg 
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

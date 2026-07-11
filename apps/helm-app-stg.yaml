@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/dezalazar/argocd_helm_project.git'
-    path: charts/hello-world      # La ruta donde está tu Chart.yaml
+    path: apps/helmapp      # La ruta donde está tu Chart.yaml
     targetRevision: main
     helm:
       valueFiles:

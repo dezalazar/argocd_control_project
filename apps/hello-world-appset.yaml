@@ -10,7 +10,6 @@ spec:
           - env: dev
           - env: stg
           - env: prd
-	  - env: qa
   template:
     metadata:
       name: 'hello-world-{{env}}'

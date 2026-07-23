@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: hello-world-appset
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - env: dev
+          - env: stg
+          - env: prd
+  template:
+    metadata:
+      name: 'hello-world-{{env}}'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/dezalazar/argocd_kustomize_project.git'
+        targetRevision: main
+        path: 'apps/hello-world/overlays/{{env}}'
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{env}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

@@ -5,24 +5,23 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - list:
-        elements:
-          - env: dev
-          - env: stg
-          - env: prd
-          - env: qa
+    - git:
+        repoURL: 'https://github.com/dezalazar/argocd_kustomize_project.git'
+        revision: main
+        directories:
+          - path: 'apps/hello-world/overlays/*'
   template:
     metadata:
-      name: 'hello-world-{{env}}'
+      name: 'hello-world-{{path.basename}}'
     spec:
       project: default
       source:
         repoURL: 'https://github.com/dezalazar/argocd_kustomize_project.git'
         targetRevision: main
-        path: 'apps/hello-world/overlays/{{env}}'
+        path: '{{path}}'
       destination:
         server: 'https://kubernetes.default.svc'
-        namespace: '{{env}}'
+        namespace: '{{path.basename}}'
       syncPolicy:
         automated:
           prune: true
